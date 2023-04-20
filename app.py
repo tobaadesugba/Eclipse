@@ -11,16 +11,25 @@ button = st.button('Generate Job Description')
 def generate_job():
     with st.spinner('Wait for it, the job description is generating...'):
         job_desc = JobDesc(input_data)
-        job_description = job_desc.get_job_desc()
-    st.success('Done!')
-    return job_description
+        result = job_desc.get_job_desc_with_exceptions()
+    if result['status'] == 'error':
+        st.error(result['content'])
+    else:
+        st.success('Done!')
+    return result
 
 
 if allow_editing and button:
-    output = st.text_area("Edit and press \"ctrl+enter\" when done", value=generate_job())
-    if st.button("Send to job portal"):
-        st.success("On its way to the specified job portals")
+    generation_result = generate_job()
+
+    if generation_result['status'] == 'okay':
+        output = st.text_area("Edit and press \"ctrl+enter\" when done", value=generation_result['content'])
+        if st.button("Send to job portal"):
+            st.success("On its way to the specified job portals")
 elif not allow_editing and button:
-    output = st.text(generate_job())
-    if st.button("Send to job portal"):
-        st.success("On its way to the specified job portals again")
+    generation_result = generate_job()
+
+    if generation_result['status'] == 'okay':
+        output = st.text(generation_result['content'])
+        if st.button("Send to job portal"):
+            st.success("On its way to the specified job portals again")
