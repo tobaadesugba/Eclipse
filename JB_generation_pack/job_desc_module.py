@@ -6,7 +6,7 @@ from openai.error import AuthenticationError, APIError, Timeout, InvalidRequestE
 class JobDesc:
     def __init__(self, prefix):
         self.prefix_message = prefix  # taking input from frontend
-        openai.api_key = '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'
+        openai.api_key = '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'
 
     def get_job_desc(self):
         suffix_message = "Generate a job description for "  # framework
