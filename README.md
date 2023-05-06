@@ -6,7 +6,7 @@ To get started with this project, clone the repository to your local machine and
 ```
 pip install -r requirements.txt
 ```
-After installing the dependencies, change the API key in the XXX python script and run the Streamlit app by running:
+After installing the dependencies, change the API key in the [job_desc_module](JB_generation_pack/job_desc_module.py) python script and run the Streamlit app by running:
 
 ```
 streamlit run app.py
